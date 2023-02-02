@@ -1,10 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
-interface IGapProps {
+interface IGapProps extends ViewStyle {
   height?: number;
   width?: number;
-  style?: ViewStyle;
 }
 
 export default function Gap(props: IGapProps) {
@@ -13,12 +12,13 @@ export default function Gap(props: IGapProps) {
 }
 
 interface StyleSheetType {
-  container: ViewStyle;
+  container: (height: number, width: number) => StyleProp<ViewStyle>;
 }
 
 const styles = StyleSheet.create<StyleSheetType>({
-  container: (height: number, width: number) => ({
+  container: (height: number, width: number): ViewStyle => ({
     height,
     width,
   }),
 });
+
