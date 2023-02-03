@@ -1,4 +1,4 @@
-import {transactionsApi} from './transactions/query';
+import {transactionsApi} from '@services/transactions/query';
 
 export const combinedMiddleware = [transactionsApi.middleware];
 

@@ -1,4 +1,3 @@
-export {};
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Transactions, TransactionState} from '@store/transaction/types';
 
