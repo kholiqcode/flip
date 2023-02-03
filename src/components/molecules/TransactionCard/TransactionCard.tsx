@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 import {Gap, StatusBadge} from '@components/atoms';
+import {SenderBankText} from '@components/molecules/SenderBankText';
 
 export interface TransactionCardProps extends ViewProps {
   data: {
@@ -39,9 +40,12 @@ const TransactionCard = (props: TransactionCardProps) => {
         style={{
           flex: 1,
         }}>
-        <Text style={StyleSheet.flatten([styles.infoText])} numberOfLines={1}>
-          {`${data?.sender_bank} → ${data?.beneficiary_bank}`}
-        </Text>
+        <SenderBankText
+          data={{
+            senderBank: data?.sender_bank,
+            beneficiaryBank: data?.beneficiary_bank,
+          }}
+        />
         <Gap height={8} />
         <Text style={styles.infoText} numberOfLines={1}>
           {`-${data?.beneficiary_name}`}
