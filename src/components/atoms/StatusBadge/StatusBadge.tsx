@@ -1,13 +1,10 @@
 import React, {memo} from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
+import {TransactionStatusEnum} from '@constants/transaction';
+
 export interface StatusBadgeProps extends ViewProps {
   isSuccess?: boolean;
-}
-
-enum TransactionStatusEnum {
-  SUCCESS = 'Berhasil',
-  PENDING = 'Pengecekan',
 }
 
 const StatusBadge = memo((props: StatusBadgeProps) => {
