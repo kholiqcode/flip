@@ -10,6 +10,7 @@ import {
 import {ICCopy} from '@assets';
 
 import {Gap} from '@components/atoms';
+import {TransactionInfoItem} from '@components/molecules';
 
 const TransactionDetail = () => {
   return (
@@ -56,57 +57,29 @@ const TransactionDetail = () => {
         </View>
         <Gap height={25} />
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 2}}>
-            <Text style={{color: 'black', fontWeight: '900', fontSize: 14}}>
-              - SYIFA SALSABYLA
-            </Text>
-            <Gap height={3} />
-            <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-              0313955548
-            </Text>
-          </View>
-          <View style={{flex: 1}}>
-            <Text style={{color: 'black', fontWeight: '900', fontSize: 14}}>
-              NOMINAL
-            </Text>
-            <Gap height={3} />
-            <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-              Rp10.028
-            </Text>
-          </View>
+          <TransactionInfoItem
+            style={{flex: 2}}
+            label="- SYIFA SALSABYLA"
+            value="0313955548"
+          />
+          <TransactionInfoItem
+            style={{flex: 1}}
+            label="NOMINAL"
+            value="Rp10.028"
+          />
         </View>
         <Gap height={25} />
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 2}}>
-            <Text style={{color: 'black', fontWeight: '900', fontSize: 14}}>
-              BERITA TRANSFER
-            </Text>
-            <Gap height={3} />
-            <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-              Coba mbanking yey
-            </Text>
-          </View>
-          <View style={{flex: 1}}>
-            <Text style={{color: 'black', fontWeight: '900', fontSize: 14}}>
-              KODE UNIK
-            </Text>
-            <Gap height={3} />
-            <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-              50
-            </Text>
-          </View>
+          <TransactionInfoItem
+            style={{flex: 2}}
+            label="BERITA TRANSFER"
+            value="Coba mbanking yey"
+          />
+          <TransactionInfoItem style={{flex: 1}} label="KODE UNIK" value="50" />
         </View>
         <Gap height={25} />
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 2}}>
-            <Text style={{color: 'black', fontWeight: '900', fontSize: 14}}>
-              WAKTU DIBUAT
-            </Text>
-            <Gap height={3} />
-            <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-              8 April 2020
-            </Text>
-          </View>
+          <TransactionInfoItem label="WAKTU DIBUAT" value="8 April 2020" />
         </View>
       </View>
     </View>
