@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 import {Gap, StatusBadge} from '@components/atoms';
 
-export interface ITransactionCardProps extends ViewProps {
+export interface TransactionCardProps extends ViewProps {
   data: {
     id: string;
     amount: number;
@@ -20,7 +20,7 @@ export interface ITransactionCardProps extends ViewProps {
   };
 }
 
-const TransactionCard = (props: ITransactionCardProps) => {
+const TransactionCard = (props: TransactionCardProps) => {
   const {data, ...baseProps} = props;
 
   const isTransactionSuccess = data?.status === 'SUCCESS';
