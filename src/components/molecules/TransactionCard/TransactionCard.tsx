@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 import {Gap, StatusBadge} from '@components/atoms';
 
-export interface ITransactionCardProps extends ViewStyle {
+export interface ITransactionCardProps extends ViewProps {
   data: {
     id: string;
     amount: number;
@@ -22,20 +22,24 @@ export interface ITransactionCardProps extends ViewStyle {
 
 const TransactionCard = (props: ITransactionCardProps) => {
   const {data, ...baseProps} = props;
+
+  const isTransactionSuccess = data?.status === 'SUCCESS';
+  const colorByStatus = isTransactionSuccess ? '#00bb83' : '#f96a53';
+
   return (
-    <View style={styles.container} {...baseProps}>
+    <View
+      style={StyleSheet.flatten([
+        styles.container,
+        {
+          borderLeftColor: colorByStatus,
+        },
+      ])}
+      {...baseProps}>
       <View
         style={{
           flex: 1,
         }}>
-        <Text
-          style={StyleSheet.flatten([
-            styles.infoText,
-            {
-              color: 'red',
-            },
-          ])}
-          numberOfLines={1}>
+        <Text style={StyleSheet.flatten([styles.infoText])} numberOfLines={1}>
           {`${data?.sender_bank} → ${data?.beneficiary_bank}`}
         </Text>
         <Gap height={8} />
@@ -48,7 +52,7 @@ const TransactionCard = (props: ITransactionCardProps) => {
             styles.infoText
           }>{`${data?.amount} ● ${data?.completed_at}`}</Text>
       </View>
-      <StatusBadge />
+      <StatusBadge isSuccess={isTransactionSuccess} />
     </View>
   );
 };
