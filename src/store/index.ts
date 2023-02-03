@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import {configureStore, PreloadedState} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
+import {combinedMiddleware} from '@services';
 import {rootPersistConfig, rootReducer} from '@store/rootReducer';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import logger from 'redux-logger';
@@ -36,6 +37,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
           })
             .concat(logger)
             .concat(createDebugger())
+            .concat(combinedMiddleware)
         : getDefaultMiddleware({
             serializableCheck: {
               ignoredActions: [
@@ -47,7 +49,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
                 REGISTER,
               ],
             },
-          }),
+          }).concat(combinedMiddleware),
     preloadedState,
   });
 };
@@ -75,5 +77,4 @@ export {
   useReduxSelector,
   useSelector,
 };
-
 export type {AppStore, RootState};

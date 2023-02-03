@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {transactionsQueryReducer} from '@services';
 import {transactionReducer} from '@store/transaction';
 import {combineReducers} from 'redux';
 
@@ -11,6 +12,7 @@ const rootPersistConfig = {
 
 const rootReducer = combineReducers({
   ...transactionReducer,
+  ...transactionsQueryReducer,
 });
 
 export {rootPersistConfig, rootReducer};

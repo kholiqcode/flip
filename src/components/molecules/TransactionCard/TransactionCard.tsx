@@ -1,24 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
+import {Transaction} from '@store/transaction/types';
+
 import {Gap, StatusBadge} from '@components/atoms';
 import {SenderBankText} from '@components/molecules/SenderBankText';
 
 export interface TransactionCardProps extends ViewProps {
-  data: {
-    id: string;
-    amount: number;
-    unique_code: number;
-    status: string;
-    sender_bank: string;
-    account_number: string;
-    beneficiary_name: string;
-    beneficiary_bank: string;
-    remark: string;
-    created_at: string;
-    completed_at: string;
-    fee: number;
-  };
+  data: Transaction;
 }
 
 const TransactionCard = (props: TransactionCardProps) => {
