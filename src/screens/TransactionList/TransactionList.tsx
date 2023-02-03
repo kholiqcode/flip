@@ -105,17 +105,14 @@ export default function TransactionList() {
     [filter],
   );
 
-  const renderItem: ListRenderItem<Transaction> = useCallback(
-    ({item}) => {
-      return (
-        <>
-          <TransactionCard data={item} />
-          <Gap height={16} />
-        </>
-      );
-    },
-    [transactionsData],
-  );
+  const renderItem: ListRenderItem<Transaction> = useCallback(({item}) => {
+    return (
+      <>
+        <TransactionCard data={item} />
+        <Gap height={16} />
+      </>
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
