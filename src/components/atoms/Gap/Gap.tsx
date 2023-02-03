@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
 
-interface IGapProps extends ViewStyle {
+interface IGapProps extends ViewProps {
   height?: number;
   width?: number;
 }
@@ -21,4 +21,3 @@ const styles = StyleSheet.create<StyleSheetType>({
     width,
   }),
 });
-
