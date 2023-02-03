@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
-import {Gap} from '../../atoms/Gap';
+import {Gap} from '@components/atoms/Gap';
 
 interface RadioButtonProps extends PressableProps {
   isSelected?: boolean;

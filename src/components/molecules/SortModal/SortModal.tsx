@@ -11,8 +11,7 @@ import {
 import {SortEnum} from '@constants/sort';
 
 import {Gap} from '@components/atoms';
-
-import {RadioButton} from '../RadioButton';
+import {RadioButton} from '@components/molecules/RadioButton';
 
 interface SortModalProps extends ModalProps {
   modalVisible: boolean;
