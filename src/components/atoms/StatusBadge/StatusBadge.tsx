@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
-export interface IStatusBadgeProps extends ViewProps {
+export interface StatusBadgeProps extends ViewProps {
   isSuccess?: boolean;
 }
 
@@ -10,7 +10,7 @@ enum TransactionStatusEnum {
   PENDING = 'Pengecekan',
 }
 
-const StatusBadge = (props: IStatusBadgeProps) => {
+const StatusBadge = memo((props: StatusBadgeProps) => {
   const {isSuccess, ...baseProps} = props;
 
   const bgColorByStatus = isSuccess ? '#00bb83' : '#fff';
@@ -41,7 +41,7 @@ const StatusBadge = (props: IStatusBadgeProps) => {
       </Text>
     </View>
   );
-};
+});
 
 export default StatusBadge;
 

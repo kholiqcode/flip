@@ -1,25 +1,24 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View, ViewProps} from 'react-native';
+import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
 import {Gap} from '../../atoms/Gap';
 
-interface IRadioButton extends ViewProps {
+interface RadioButtonProps extends PressableProps {
   isSelected?: boolean;
   label: string;
-  onPress?: () => void;
 }
 
-const RadioButton = React.memo((props: IRadioButton) => {
-  const {isSelected, label, onPress, ...baseProps} = props;
+const RadioButton = React.memo((props: RadioButtonProps) => {
+  const {isSelected, label, ...baseProps} = props;
 
   return (
-    <View style={{flexDirection: 'row'}} {...baseProps}>
-      <Pressable style={styles.wrapper} onPress={onPress}>
+    <Pressable style={{flexDirection: 'row'}} {...baseProps}>
+      <View style={styles.wrapper}>
         {isSelected ? <View style={styles.dot} /> : null}
-      </Pressable>
+      </View>
       <Gap width={10} />
       <Text style={{color: '#202020', fontWeight: '600'}}>{label}</Text>
-    </View>
+    </Pressable>
   );
 });
 
