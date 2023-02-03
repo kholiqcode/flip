@@ -21,7 +21,7 @@ interface SortModalProps extends ModalProps {
 
 const SortModal = memo((props: SortModalProps) => {
   const {modalVisible, onClose, onSort, ...baseProps} = props;
-  const [selectedSort, setSelectedSort] = useState<string>('');
+  const [selectedSort, setSelectedSort] = useState<string>(SortEnum.URUTKAN);
 
   const renderItem = useCallback(
     ({item, index}: {item: string; index: number}) => {
