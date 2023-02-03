@@ -1,15 +1,20 @@
 import {useCallback, useMemo, useState} from 'react';
 
-export default function useFilter<T>(
-  data: T[],
+export type Filter<T> = {
   search: {
     query: string;
     field: Array<keyof T>;
-  },
+  };
   sort: {
     field: keyof T;
     order: 'asc' | 'desc';
-  },
+  };
+};
+
+export default function useFilter<T>(
+  data: T[],
+  search: Filter<T>['search'],
+  sort: Filter<T>['sort'],
 ): T[] {
   const [searchedData, setSearchedData] = useState(data);
 
@@ -19,7 +24,7 @@ export default function useFilter<T>(
       searched = data.filter(item =>
         search.field.some(
           key =>
-            item &&
+            key &&
             item[key] &&
             item[key]
               .toString()
