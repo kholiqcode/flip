@@ -11,12 +11,10 @@ export type Filter<T> = {
   };
 };
 
-export default function useFilter<T>(
-  data: T[],
-  search: Filter<T>['search'],
-  sort: Filter<T>['sort'],
-): T[] {
+export default function useFilter<T>(data: T[], filter: Filter<T>): T[] {
   const [searchedData, setSearchedData] = useState(data);
+
+  const {search, sort} = filter;
 
   useMemo(() => {
     if (data.length) {

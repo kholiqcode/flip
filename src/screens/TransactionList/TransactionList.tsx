@@ -28,8 +28,7 @@ export default function TransactionList() {
 
   const filteredData = useFilter(
     transactionsData?.length ? transactionsData : [],
-    filter.search,
-    filter.sort,
+    filter,
   );
 
   const onSearch = (query: string) => {
