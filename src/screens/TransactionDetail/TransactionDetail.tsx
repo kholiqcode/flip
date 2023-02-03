@@ -10,7 +10,7 @@ import {
 import {ICCopy} from '@assets';
 
 import {Gap} from '@components/atoms';
-import {TransactionInfoItem} from '@components/molecules';
+import {SenderBankText, TransactionInfoItem} from '@components/molecules';
 
 const TransactionDetail = () => {
   return (
@@ -50,11 +50,12 @@ const TransactionDetail = () => {
         </Pressable>
       </View>
       <View style={{backgroundColor: 'white', padding: 20}}>
-        <View>
-          <Text style={{color: 'black', fontWeight: '800', fontSize: 14}}>
-            {`Permata → BNI`}
-          </Text>
-        </View>
+        <SenderBankText
+          data={{
+            senderBank: 'Permata',
+            beneficiaryBank: 'BNI',
+          }}
+        />
         <Gap height={25} />
         <View style={{flexDirection: 'row'}}>
           <TransactionInfoItem
