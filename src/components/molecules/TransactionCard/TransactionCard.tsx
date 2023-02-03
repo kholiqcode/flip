@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 import {Transaction} from '@store/transaction/types';
@@ -10,7 +10,7 @@ export interface TransactionCardProps extends ViewProps {
   data: Transaction;
 }
 
-const TransactionCard = (props: TransactionCardProps) => {
+const TransactionCard = memo((props: TransactionCardProps) => {
   const {data, ...baseProps} = props;
 
   const isTransactionSuccess = data?.status === 'SUCCESS';
@@ -48,7 +48,7 @@ const TransactionCard = (props: TransactionCardProps) => {
       <StatusBadge isSuccess={isTransactionSuccess} />
     </View>
   );
-};
+});
 
 export default TransactionCard;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
 import {Gap} from '@components/atoms/Gap';
@@ -8,7 +8,7 @@ interface RadioButtonProps extends PressableProps {
   label: string;
 }
 
-const RadioButton = React.memo((props: RadioButtonProps) => {
+const RadioButton = memo((props: RadioButtonProps) => {
   const {isSelected, label, ...baseProps} = props;
 
   return (
