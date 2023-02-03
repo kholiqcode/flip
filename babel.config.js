@@ -8,6 +8,7 @@ module.exports = {
           {'@constants': './src/constants'},
           {'@assets': './src/assets'},
           {'@store': './src/store'},
+          {'@services': './src/services'},
           {'@components': './src/components'},
           {'@navigation': './src/navigation'},
           {'@screens': './src/screens'},
