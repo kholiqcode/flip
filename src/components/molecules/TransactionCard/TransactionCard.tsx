@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 import {Transaction} from '@store/transaction/types';
+import {formatCurrency, formatDate} from '@utils/formatter';
 
 import {Gap, StatusBadge} from '@components/atoms';
 import {SenderBankText} from '@components/molecules/SenderBankText';
@@ -36,14 +37,19 @@ const TransactionCard = memo((props: TransactionCardProps) => {
           }}
         />
         <Gap height={8} />
-        <Text style={styles.infoText} numberOfLines={1}>
-          {`-${data?.beneficiary_name}`}
+        <Text
+          style={StyleSheet.flatten([
+            styles.infoText,
+            {textTransform: 'uppercase'},
+          ])}
+          numberOfLines={1}>
+          {isTransactionSuccess ? null : '- '}
+          {data?.beneficiary_name}
         </Text>
         <Gap height={8} />
-        <Text
-          style={
-            styles.infoText
-          }>{`${data?.amount} ● ${data?.completed_at}`}</Text>
+        <Text style={styles.infoText}>{`${formatCurrency(
+          data?.amount,
+        )} ● ${formatDate(data?.completed_at)}`}</Text>
       </View>
       <StatusBadge isSuccess={isTransactionSuccess} />
     </View>
@@ -65,5 +71,9 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 12,
   },
-  infoText: {color: '#202020', fontWeight: '600', fontSize: 12},
+  infoText: {
+    color: '#202020',
+    fontWeight: '600',
+    fontSize: 12,
+  },
 });
