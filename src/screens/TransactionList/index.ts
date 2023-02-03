@@ -1,1 +1,1 @@
-export {default as TransactionList} from '@screens/TransactionList/TransactionList.screen';
+export {default as TransactionList} from '@screens/TransactionList/TransactionList';
