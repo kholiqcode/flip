@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 
 import {ICChevronDown, ICSearch} from '@assets';
+import {SortEnum} from '@constants/sort';
+import useFilter, {Filter} from '@hooks/useFilter';
 import {useGetTransactionsQuery} from '@services/transactions';
 import {Transaction} from '@store/transaction/types';
 
@@ -18,8 +20,35 @@ import {SortModal, TransactionCard} from '@components/molecules';
 
 export default function TransactionList() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [filter, setFilter] = useState<Filter<Transaction>>({
+    search: {
+      query: '',
+      field: ['beneficiary_name', 'beneficiary_bank', 'sender_bank', 'amount'],
+    },
+    sort: {
+      field: 'beneficiary_name',
+      order: 'asc',
+    },
+  });
 
   const {data: transactionsData} = useGetTransactionsQuery({}, {});
+
+  const filteredData = useFilter(
+    transactionsData?.length ? transactionsData : [],
+    filter.search,
+    filter.sort,
+  );
+
+  const onSearch = (value: string) => {
+    const newFilter = {
+      ...filter,
+      search: {
+        ...filter.search,
+        query: value,
+      },
+    };
+    setFilter(newFilter);
+  };
 
   const keyExtractor = useCallback((item: Transaction) => item.id, []);
 
@@ -34,6 +63,7 @@ export default function TransactionList() {
             placeholder="Cari nama, bank atau nominal"
             placeholderTextColor="#a7a7a7"
             numberOfLines={1}
+            onChangeText={onSearch}
           />
           <Pressable
             onPress={() => setModalVisible(true)}
@@ -44,7 +74,7 @@ export default function TransactionList() {
                 fontSize: 12,
                 fontWeight: 'bold',
               }}>
-              URUTKAN
+              {SortEnum.URUTKAN}
             </Text>
             <Gap width={5} />
             <ICChevronDown height={16} width={16} fill="#f96a53" />
@@ -57,13 +87,11 @@ export default function TransactionList() {
   );
 
   const renderItem: ListRenderItem<Transaction> = useCallback(
-    ({item, index}) => {
+    ({item}) => {
       return (
         <>
           <TransactionCard data={item} />
-          {transactionsData && transactionsData.length - 1 === index ? null : (
-            <Gap height={16} />
-          )}
+          <Gap height={16} />
         </>
       );
     },
@@ -73,7 +101,7 @@ export default function TransactionList() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={transactionsData}
+        data={filteredData}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
@@ -94,7 +122,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f3faf8',
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingTop: 12,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -116,10 +145,5 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  sortText: {
-    color: '#f96a53',
-    fontSize: 12,
-    fontWeight: 'bold',
   },
 });
