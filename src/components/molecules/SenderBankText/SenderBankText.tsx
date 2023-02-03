@@ -14,11 +14,29 @@ const SenderBankText = memo((props: SenderBankTextProps) => {
 
   return (
     <View style={styles.container} {...baseProps}>
-      <Text style={styles.bankNameTxt}>{data.senderBank}</Text>
+      <Text
+        style={StyleSheet.flatten([
+          styles.bankNameTxt,
+          {
+            textTransform:
+              data.senderBank.length > 4 ? 'capitalize' : 'uppercase',
+          },
+        ])}>
+        {data.senderBank}
+      </Text>
       <Gap width={5} />
       <ICArrowRight width={16} height={16} />
       <Gap width={5} />
-      <Text style={styles.bankNameTxt}>{data.beneficiaryBank}</Text>
+      <Text
+        style={StyleSheet.flatten([
+          styles.bankNameTxt,
+          {
+            textTransform:
+              data.senderBank.length > 4 ? 'capitalize' : 'uppercase',
+          },
+        ])}>
+        {data.beneficiaryBank}
+      </Text>
     </View>
   );
 });
