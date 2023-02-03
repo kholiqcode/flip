@@ -15,7 +15,7 @@ import {RadioButton} from '@components/molecules/RadioButton';
 
 interface SortModalProps extends ModalProps {
   modalVisible: boolean;
-  onSort?: (sort: string) => void;
+  onSort?: (sort: SortEnum) => void;
   onClose: () => void;
 }
 
@@ -24,7 +24,7 @@ const SortModal = memo((props: SortModalProps) => {
   const [selectedSort, setSelectedSort] = useState<string>(SortEnum.URUTKAN);
 
   const renderItem = useCallback(
-    ({item, index}: {item: string; index: number}) => {
+    ({item, index}: {item: SortEnum; index: number}) => {
       const isLastItem = index + 1 === Object.keys(SortEnum).length;
       return (
         <>
