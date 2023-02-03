@@ -1,9 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
-export interface IStatusBadgeProps {
+export interface IStatusBadgeProps extends ViewProps {
   isSuccess?: boolean;
-  styles?: ViewProps;
 }
 
 enum TransactionStatusEnum {
@@ -13,9 +12,29 @@ enum TransactionStatusEnum {
 
 const StatusBadge = (props: IStatusBadgeProps) => {
   const {isSuccess, ...baseProps} = props;
+
+  const bgColorByStatus = isSuccess ? '#00bb83' : '#fff';
+  const borderColorByStatus = isSuccess ? '#00bb83' : '#f96a53';
+  const labelColorByStatus = isSuccess ? '#fff' : '#202020';
+
   return (
-    <View style={styles.container} {...baseProps}>
-      <Text style={styles.label}>
+    <View
+      style={StyleSheet.flatten([
+        styles.container,
+        {
+          borderWidth: isSuccess ? 0 : 2,
+          borderColor: borderColorByStatus,
+          backgroundColor: bgColorByStatus,
+        },
+      ])}
+      {...baseProps}>
+      <Text
+        style={StyleSheet.flatten([
+          styles.label,
+          {
+            color: labelColorByStatus,
+          },
+        ])}>
         {isSuccess
           ? TransactionStatusEnum.SUCCESS
           : TransactionStatusEnum.PENDING}
@@ -28,8 +47,6 @@ export default StatusBadge;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 2,
-    borderColor: '#f96a53',
     borderRadius: 5,
     paddingHorizontal: 12,
     paddingVertical: 4,
