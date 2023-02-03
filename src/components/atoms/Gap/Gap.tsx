@@ -1,9 +1,13 @@
 import React, {memo} from 'react';
-import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {StyleProp, View, ViewProps, ViewStyle} from 'react-native';
 
 interface GapProps extends ViewProps {
   height?: number;
   width?: number;
+}
+
+interface StyleSheetType {
+  container: (height: number, width: number) => StyleProp<ViewStyle>;
 }
 
 const Gap = memo((props: GapProps) => {
@@ -13,13 +17,9 @@ const Gap = memo((props: GapProps) => {
 
 export default Gap;
 
-interface StyleSheetType {
-  container: (height: number, width: number) => StyleProp<ViewStyle>;
-}
-
-const styles = StyleSheet.create<StyleSheetType>({
+const styles: StyleSheetType = {
   container: (height: number, width: number): ViewStyle => ({
     height,
     width,
   }),
-});
+};
