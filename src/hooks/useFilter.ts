@@ -47,7 +47,7 @@ export default function useFilter<T>(
       }
       setSearchedData(searched);
     }
-  }, [search.query, sort, data]);
+  }, [search, sort, data]);
 
   return searchedData;
 }
