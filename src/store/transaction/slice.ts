@@ -1,9 +1,9 @@
 export {};
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TransactionState} from '@store/transaction/types';
+import {Transactions, TransactionState} from '@store/transaction/types';
 
 const initialState: TransactionState = {
-  transactions: null,
+  transactions: {},
 };
 
 const reducerName = 'transaction';
@@ -12,7 +12,10 @@ const slice = createSlice({
   name: reducerName,
   initialState,
   reducers: {
-    setTransactions(state: TransactionState, action: PayloadAction<null>) {
+    setTransactions(
+      state: TransactionState,
+      action: PayloadAction<Transactions>,
+    ) {
       state.transactions = action?.payload;
     },
   },
