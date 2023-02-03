@@ -1,25 +1,18 @@
-import React, {useCallback, useState} from 'react';
-import {
-  FlatList,
-  ListRenderItem,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import React, {useCallback, useMemo, useState} from 'react';
+import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 
-import {ICChevronDown, ICSearch} from '@assets';
 import {SortEnum} from '@constants/sort';
 import useFilter, {Filter} from '@hooks/useFilter';
 import {useGetTransactionsQuery} from '@services/transactions';
 import {Transaction} from '@store/transaction/types';
 
 import {Gap} from '@components/atoms';
-import {SortModal, TransactionCard} from '@components/molecules';
+import {FilterButton, SortModal, TransactionCard} from '@components/molecules';
+import {SearchBar} from '@components/oraganisms';
 
 export default function TransactionList() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [sortBy, setSortBy] = useState(SortEnum.URUTKAN);
   const [filter, setFilter] = useState<Filter<Transaction>>({
     search: {
       query: '',
@@ -39,51 +32,78 @@ export default function TransactionList() {
     filter.sort,
   );
 
-  const onSearch = (value: string) => {
+  const onSearch = (query: string) => {
     const newFilter = {
       ...filter,
       search: {
         ...filter.search,
-        query: value,
+        query,
       },
     };
     setFilter(newFilter);
   };
 
+  const onFilter = (value: SortEnum) => {
+    setSortBy(value);
+
+    let newSort: Filter<Transaction>['sort'];
+    switch (value) {
+      case SortEnum.NAMAZA:
+        newSort = {
+          field: 'beneficiary_name',
+          order: 'desc',
+        };
+        break;
+      case SortEnum.TANGGAL_TERBARU:
+        newSort = {
+          field: 'created_at',
+          order: 'asc',
+        };
+        break;
+      case SortEnum.TANGGAL_TERLAMA:
+        newSort = {
+          field: 'created_at',
+          order: 'desc',
+        };
+        break;
+
+      default:
+        newSort = {
+          field: 'beneficiary_name',
+          order: 'asc',
+        };
+        break;
+    }
+
+    setFilter(prevState => {
+      return {
+        ...prevState,
+        sort: newSort,
+      };
+    });
+
+    setModalVisible(false);
+  };
+
   const keyExtractor = useCallback((item: Transaction) => item.id, []);
 
-  const renderHeader = useCallback(
+  const renderHeader = useMemo(
     () => (
       <>
-        <View style={styles.searchContainer}>
-          <ICSearch fill={'#a7a7a7'} height={16} width={16} />
-          <Gap width={5} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Cari nama, bank atau nominal"
-            placeholderTextColor="#a7a7a7"
-            numberOfLines={1}
-            onChangeText={onSearch}
-          />
-          <Pressable
-            onPress={() => setModalVisible(true)}
-            style={styles.sortContainer}>
-            <Text
-              style={{
-                color: '#f96a53',
-                fontSize: 12,
-                fontWeight: 'bold',
-              }}>
-              {SortEnum.URUTKAN}
-            </Text>
-            <Gap width={5} />
-            <ICChevronDown height={16} width={16} fill="#f96a53" />
-          </Pressable>
-        </View>
+        <SearchBar
+          onSearch={onSearch}
+          value={filter.search.query}
+          rightElement={
+            <FilterButton
+              label={sortBy}
+              onPress={() => setModalVisible(true)}
+            />
+          }
+        />
         <Gap height={16} />
       </>
     ),
-    [],
+    [filter],
   );
 
   const renderItem: ListRenderItem<Transaction> = useCallback(
@@ -112,7 +132,7 @@ export default function TransactionList() {
         onClose={() => {
           setModalVisible(false);
         }}
-        onSort={sort => console.warn(sort)}
+        onSort={onFilter}
       />
     </View>
   );
@@ -124,26 +144,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3faf8',
     paddingHorizontal: 12,
     paddingTop: 12,
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    height: 50,
-    borderRadius: 5,
-    paddingHorizontal: 12,
-  },
-  searchInput: {
-    color: '#202020',
-    flex: 2,
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  sortContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
