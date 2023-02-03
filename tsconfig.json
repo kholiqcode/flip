@@ -14,7 +14,8 @@
       "@components/*": ["components/*"],
       "@screens/*": ["screens/*"],
       "@navigation/*": ["navigation/*"],
-      "@navigation": ["navigation"]
+      "@navigation": ["navigation"],
+      "@utils/*": ["utils/*"]
     }
   }
 }
