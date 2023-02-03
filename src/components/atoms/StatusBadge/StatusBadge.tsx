@@ -48,5 +48,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 4,
   },
-  label: {color: '#202020', fontWeight: '800', fontSize: 12},
+  label: {color: '#202020', fontWeight: '900', fontSize: 12},
 });
