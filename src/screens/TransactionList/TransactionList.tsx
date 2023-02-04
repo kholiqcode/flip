@@ -1,11 +1,12 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
+import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
 
 import {SortEnum} from '@constants/sort';
 import useFilter, {Filter} from '@hooks/useFilter';
 import {RootStackParamList} from '@navigation/types';
 import {useGetTransactionsQuery} from '@services/transactions';
 import {Transaction} from '@services/transactions/types';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {Gap} from '@components/atoms';
 import {FilterButton, SortModal} from '@components/molecules';
@@ -131,7 +132,7 @@ export default function TransactionList(
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={filteredData}
         keyExtractor={keyExtractor}
@@ -146,7 +147,7 @@ export default function TransactionList(
         }}
         onSort={onFilter}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
