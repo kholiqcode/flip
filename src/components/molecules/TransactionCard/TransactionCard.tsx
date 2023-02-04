@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
+import {TransactionStatusServiceEnum} from '@constants/transaction';
 import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
@@ -14,7 +15,8 @@ export interface TransactionCardProps extends PressableProps {
 const TransactionCard = memo((props: TransactionCardProps) => {
   const {data, ...baseProps} = props;
 
-  const isTransactionSuccess = data?.status === 'SUCCESS';
+  const isTransactionSuccess =
+    data?.status === TransactionStatusServiceEnum.SUCCESS;
   const colorByStatus = isTransactionSuccess ? '#00bb83' : '#f96a53';
 
   return (

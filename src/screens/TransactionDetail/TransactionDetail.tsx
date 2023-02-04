@@ -10,6 +10,10 @@ import {
 } from 'react-native';
 
 import {ICCopy} from '@assets';
+import {
+  TransactionDetailEnum,
+  TransactionStatusServiceEnum,
+} from '@constants/transaction';
 import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
@@ -23,25 +27,25 @@ import {
 const transactionInfoBuilder = (data: Transaction) => [
   {
     label:
-      data.status === 'SUCCESS'
+      data.status === TransactionStatusServiceEnum.SUCCESS
         ? data.beneficiary_name
-        : `- ${data.beneficiary_name}`,
+        : `-${data.beneficiary_name}`,
     value: data.account_number,
   },
   {
-    label: 'Nominal',
+    label: TransactionDetailEnum.NOMINAL,
     value: formatCurrency(data.amount),
   },
   {
-    label: 'Berita Transfer',
+    label: TransactionDetailEnum.BERITA_TRANSAFER,
     value: data.remark,
   },
   {
-    label: 'Kode Unik',
+    label: TransactionDetailEnum.KODE_UNIK,
     value: data.unique_code.toString(10),
   },
   {
-    label: 'Waktu Dibuat',
+    label: TransactionDetailEnum.WAKTU_DIBUAT,
     value: formatDate(data.created_at),
   },
 ];
@@ -72,7 +76,7 @@ export default function (props: TransactionDetailScreenNavigationProp) {
           borderBottomWidth: 1,
         }}>
         <Text style={{color: 'black', fontWeight: '800', fontSize: 14}}>
-          ID TRANSAKSI: #{data?.id}
+          {TransactionDetailEnum.ID_TRANSAKSI}: #{data?.id}
         </Text>
         <Gap width={5} />
         <TouchableOpacity onPress={copyToClipboard} activeOpacity={0.4}>
@@ -89,11 +93,11 @@ export default function (props: TransactionDetailScreenNavigationProp) {
           justifyContent: 'space-between',
         }}>
         <Text style={{color: 'black', fontWeight: '800', fontSize: 14}}>
-          DETAIL TRANSAKSI
+          {TransactionDetailEnum.DETAIL_TRANSAKSI}
         </Text>
         <Pressable>
           <Text style={{color: '#f96a53', fontWeight: '800', fontSize: 14}}>
-            Tutup
+            {TransactionDetailEnum.TUTUP}
           </Text>
         </Pressable>
       </View>
