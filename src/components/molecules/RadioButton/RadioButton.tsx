@@ -17,7 +17,7 @@ const RadioButton = memo((props: RadioButtonProps) => {
         {isSelected ? <View style={styles.dot} /> : null}
       </View>
       <Gap width={10} />
-      <Text style={{color: '#202020', fontWeight: '600'}}>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
     </Pressable>
   );
 });
@@ -40,4 +40,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#f96a53',
   },
+  label: {color: '#202020', fontWeight: '600'},
 });
