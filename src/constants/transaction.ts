@@ -10,7 +10,7 @@ export enum TransactionStatusServiceEnum {
 
 export enum TransactionDetailEnum {
   ID_TRANSAKSI = 'ID TRANSAKSI',
-  DETAIL_TRANSAKSI = 'DETAIL_TRANSAKSI',
+  DETAIL_TRANSAKSI = 'DETAIL TRANSAKSI',
   NOMINAL = 'NOMINAL',
   BERITA_TRANSAFER = 'BERITA TRANSAFER',
   KODE_UNIK = 'KODE UNIK',

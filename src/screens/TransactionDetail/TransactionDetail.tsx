@@ -88,6 +88,7 @@ export default function (props: TransactionDetailScreenNavigationProp) {
             />
           )}
           numColumns={2}
+          scrollEnabled={false}
         />
       </View>
     </View>
