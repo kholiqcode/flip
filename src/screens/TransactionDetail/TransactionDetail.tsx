@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {
@@ -52,15 +52,8 @@ export default function (props: TransactionDetailScreenNavigationProp) {
     [],
   );
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.trxIdWrapper}>
-        <Text style={styles.text}>
-          {TransactionDetailEnum.ID_TRANSAKSI}: #{data?.id}
-        </Text>
-        <Gap width={5} />
-        <CopyButton text={data.id} />
-      </View>
+  const renderHeaderSection = useMemo(
+    () => (
       <View style={styles.headerWrapper}>
         <Text style={styles.text}>
           {TransactionDetailEnum.DETAIL_TRANSAKSI}
@@ -69,6 +62,12 @@ export default function (props: TransactionDetailScreenNavigationProp) {
           <Text style={styles.closeTxt}>{TransactionDetailEnum.TUTUP}</Text>
         </Pressable>
       </View>
+    ),
+    [],
+  );
+
+  const renderTransactionInfo = useMemo(
+    () => (
       <View style={styles.infoWrapper}>
         <SenderBankText
           data={{
@@ -91,6 +90,21 @@ export default function (props: TransactionDetailScreenNavigationProp) {
           scrollEnabled={false}
         />
       </View>
+    ),
+    [],
+  );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.trxIdWrapper}>
+        <Text style={styles.text}>
+          {TransactionDetailEnum.ID_TRANSAKSI}: #{data?.id}
+        </Text>
+        <Gap width={5} />
+        <CopyButton text={data.id} />
+      </View>
+      {renderHeaderSection}
+      {renderTransactionInfo}
     </View>
   );
 }
