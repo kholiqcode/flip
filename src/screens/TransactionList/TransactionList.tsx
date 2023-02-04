@@ -3,6 +3,7 @@ import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 
 import {SortEnum} from '@constants/sort';
 import useFilter, {Filter} from '@hooks/useFilter';
+import {RootStackParamList} from '@navigation/types';
 import {useGetTransactionsQuery} from '@services/transactions';
 import {Transaction} from '@store/transaction/types';
 
@@ -10,7 +11,17 @@ import {Gap} from '@components/atoms';
 import {FilterButton, SortModal, TransactionCard} from '@components/molecules';
 import {SearchBar} from '@components/oraganisms';
 
-export default function TransactionList() {
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+type TransactionListScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'TransactionListScreen'
+>;
+
+export default function TransactionList(
+  props: TransactionListScreenNavigationProp,
+) {
+  const {navigation} = props;
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState(SortEnum.URUTKAN);
   const [filter, setFilter] = useState<Filter<Transaction>>({
@@ -108,7 +119,12 @@ export default function TransactionList() {
   const renderItem: ListRenderItem<Transaction> = useCallback(({item}) => {
     return (
       <>
-        <TransactionCard data={item} />
+        <TransactionCard
+          data={item}
+          onPress={() =>
+            navigation.navigate('TransactionDetailScreen', {data: item})
+          }
+        />
         <Gap height={16} />
       </>
     );
