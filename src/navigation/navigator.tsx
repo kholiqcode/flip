@@ -13,16 +13,20 @@ export default function Navigator() {
       <Stack.Navigator
         initialRouteName="TransactionListScreen"
         screenOptions={{
-          headerShown: false,
           animation: 'fade_from_bottom',
         }}>
         <Stack.Screen
           name="TransactionListScreen"
           component={TransactionList}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="TransactionDetailScreen"
           component={TransactionDetail}
+          options={{
+            title: 'Transaction Detail',
+            headerTitleAlign: 'center',
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
