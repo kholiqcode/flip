@@ -25,8 +25,7 @@ export default function useFilter<T>(data: T[], filter: Filter<T>): T[] {
             key =>
               key &&
               item[key] &&
-              item[key]
-                .toString()
+              String(item[key])
                 .toLowerCase()
                 .includes(search.query.toLowerCase()),
           ),

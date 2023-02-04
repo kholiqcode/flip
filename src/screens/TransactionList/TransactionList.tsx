@@ -67,13 +67,13 @@ export default function TransactionList(
       case SortEnum.TANGGAL_TERBARU:
         newSort = {
           field: 'created_at',
-          order: 'asc',
+          order: 'desc',
         };
         break;
       case SortEnum.TANGGAL_TERLAMA:
         newSort = {
           field: 'created_at',
-          order: 'desc',
+          order: 'asc',
         };
         break;
 
