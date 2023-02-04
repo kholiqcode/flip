@@ -8,8 +8,8 @@ import {useGetTransactionsQuery} from '@services/transactions';
 import {Transaction} from '@services/transactions/types';
 
 import {Gap} from '@components/atoms';
-import {FilterButton, SortModal, TransactionCard} from '@components/molecules';
-import {SearchBar} from '@components/oraganisms';
+import {FilterButton, SortModal} from '@components/molecules';
+import {SearchBar, TransactionCard} from '@components/oraganisms';
 
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
