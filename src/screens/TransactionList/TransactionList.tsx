@@ -1,5 +1,10 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  StyleSheet,
+} from 'react-native';
 
 import {SortEnum} from '@constants/sort';
 import useFilter, {Filter} from '@hooks/useFilter';
@@ -36,7 +41,7 @@ export default function TransactionList(
     },
   });
 
-  const {data: transactionsData} = useGetTransactionsQuery({}, {});
+  const {data: transactionsData, isLoading} = useGetTransactionsQuery({}, {});
 
   const filteredData = useFilter(
     transactionsData?.length ? transactionsData : [],
@@ -139,6 +144,9 @@ export default function TransactionList(
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
         stickyHeaderIndices={[0]}
+        ListFooterComponent={
+          isLoading ? <ActivityIndicator color="#f96a53" size="large" /> : null
+        }
       />
       <SortModal
         modalVisible={modalVisible}
