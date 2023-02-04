@@ -28,7 +28,7 @@ export default function TransactionList(
   props: TransactionListScreenNavigationProp,
 ) {
   const {navigation} = props;
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState(SortEnum.URUTKAN);
   const [filter, setFilter] = useState<Filter<Transaction>>({
     search: {
@@ -98,7 +98,7 @@ export default function TransactionList(
       };
     });
 
-    setModalVisible(false);
+    setIsModalVisible(false);
   };
 
   const keyExtractor = useCallback((item: Transaction) => item.id, []);
@@ -112,7 +112,7 @@ export default function TransactionList(
           rightElement={
             <FilterButton
               label={sortBy}
-              onPress={() => setModalVisible(true)}
+              onPress={() => setIsModalVisible(true)}
             />
           }
         />
@@ -147,11 +147,12 @@ export default function TransactionList(
         ListFooterComponent={
           isLoading ? <ActivityIndicator color="#f96a53" size="large" /> : null
         }
+        showsVerticalScrollIndicator={false}
       />
       <SortModal
-        modalVisible={modalVisible}
+        modalVisible={isModalVisible}
         onClose={() => {
-          setModalVisible(false);
+          setIsModalVisible(false);
         }}
         onSort={onFilter}
       />
