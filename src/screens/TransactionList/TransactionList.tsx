@@ -10,7 +10,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {Gap} from '@components/atoms';
 import {FilterButton, SortModal} from '@components/molecules';
-import {SearchBar, TransactionCard} from '@components/oraganisms';
+import {SearchBar, TransactionCard} from '@components/organisms';
 
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
