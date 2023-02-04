@@ -32,7 +32,7 @@ const SenderBankText = memo((props: SenderBankTextProps) => {
           styles.bankNameTxt,
           {
             textTransform:
-              data.senderBank.length > 4 ? 'capitalize' : 'uppercase',
+              data.beneficiaryBank.length > 4 ? 'capitalize' : 'uppercase',
           },
         ])}>
         {data.beneficiaryBank}
