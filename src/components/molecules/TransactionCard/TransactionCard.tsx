@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
-import {Transaction} from '@store/transaction/types';
+import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
 import {Gap, StatusBadge} from '@components/atoms';

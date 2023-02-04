@@ -1,1 +1,1 @@
-export {default as FilterButton} from './FilterButton';
+export {default as FilterButton} from '@components/molecules/FilterButton/FilterButton';

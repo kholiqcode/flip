@@ -1,1 +1,1 @@
-export {default as StatusBadge} from './StatusBadge';
+export {default as StatusBadge} from '@components/atoms/StatusBadge/StatusBadge';

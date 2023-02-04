@@ -1,1 +1,1 @@
-export {default as TransactionInfoItem} from './TransactionInfoItem';
+export {default as TransactionInfoItem} from '@components/molecules/TransactionInfoItem/TransactionInfoItem';

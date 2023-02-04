@@ -1,4 +1,4 @@
-import {Transaction} from '@store/transaction/types';
+import {Transaction} from '@services/transactions/types';
 
 export type RootStackParamList = {
   TransactionListScreen: undefined;

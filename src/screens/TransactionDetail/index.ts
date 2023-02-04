@@ -1,1 +1,1 @@
-export {default as TransactionDetail} from './TransactionDetail';
+export {default as TransactionDetail} from '@screens/TransactionDetail/TransactionDetail';

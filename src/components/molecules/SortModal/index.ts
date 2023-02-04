@@ -1,1 +1,1 @@
-export {default as SortModal} from './SortModal';
+export {default as SortModal} from '@components/molecules/SortModal/SortModal';
