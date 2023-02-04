@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {ICCopy} from '@assets';
-import {Transaction} from '@store/transaction/types';
+import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
 import {Gap} from '@components/atoms';

@@ -1,6 +1,6 @@
 import {createApi} from '@reduxjs/toolkit/dist/query/react';
 import {baseQuery} from '@services/baseQuery';
-import {Transaction, Transactions} from '@store/transaction/types';
+import {Transaction, Transactions} from '@services/transactions/types';
 
 const reducerPath = 'transactionsApi';
 

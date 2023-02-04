@@ -5,7 +5,7 @@ import {SortEnum} from '@constants/sort';
 import useFilter, {Filter} from '@hooks/useFilter';
 import {RootStackParamList} from '@navigation/types';
 import {useGetTransactionsQuery} from '@services/transactions';
-import {Transaction} from '@store/transaction/types';
+import {Transaction} from '@services/transactions/types';
 
 import {Gap} from '@components/atoms';
 import {FilterButton, SortModal, TransactionCard} from '@components/molecules';
