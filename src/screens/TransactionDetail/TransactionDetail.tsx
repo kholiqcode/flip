@@ -5,6 +5,7 @@ import {
   TransactionDetailEnum,
   TransactionStatusServiceEnum,
 } from '@constants/transaction';
+import useToggle from '@hooks/useToggle';
 import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
@@ -45,6 +46,8 @@ export default function (props: TransactionDetailScreenNavigationProp) {
   const {route} = props;
   const {data} = route.params;
 
+  const [iscloseInfo, setIsCloseInfo] = useToggle(true);
+
   const transactionInfo: InfoItem[] = transactionInfoBuilder(data);
 
   const keyExtractor = useCallback(
@@ -58,7 +61,7 @@ export default function (props: TransactionDetailScreenNavigationProp) {
         <Text style={styles.text}>
           {TransactionDetailEnum.DETAIL_TRANSAKSI}
         </Text>
-        <Pressable>
+        <Pressable onPress={setIsCloseInfo}>
           <Text style={styles.closeTxt}>{TransactionDetailEnum.TUTUP}</Text>
         </Pressable>
       </View>
@@ -104,7 +107,7 @@ export default function (props: TransactionDetailScreenNavigationProp) {
         <CopyButton text={data.id} />
       </View>
       {renderHeaderSection}
-      {renderTransactionInfo}
+      {iscloseInfo ? renderTransactionInfo : null}
     </View>
   );
 }
