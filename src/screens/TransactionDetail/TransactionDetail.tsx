@@ -1,15 +1,6 @@
 import React, {useCallback} from 'react';
-import {
-  Clipboard,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 
-import {ICCopy} from '@assets';
 import {
   TransactionDetailEnum,
   TransactionStatusServiceEnum,
@@ -17,7 +8,7 @@ import {
 import {Transaction} from '@services/transactions/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
 
-import {Gap} from '@components/atoms';
+import {CopyButton, Gap} from '@components/atoms';
 import {SenderBankText, TransactionInfoItem} from '@components/molecules';
 import {
   InfoItem,
@@ -61,47 +52,24 @@ export default function (props: TransactionDetailScreenNavigationProp) {
     [],
   );
 
-  const copyToClipboard = () => {
-    Clipboard.setString(data.id);
-  };
-
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: 'white',
-          padding: 20,
-          flexDirection: 'row',
-          borderBottomColor: '#f8f8f8',
-          borderBottomWidth: 1,
-        }}>
-        <Text style={{color: 'black', fontWeight: '800', fontSize: 14}}>
+      <View style={styles.trxIdWrapper}>
+        <Text style={styles.text}>
           {TransactionDetailEnum.ID_TRANSAKSI}: #{data?.id}
         </Text>
         <Gap width={5} />
-        <TouchableOpacity onPress={copyToClipboard} activeOpacity={0.4}>
-          <ICCopy fill="#f96a53" width={20} height={20} />
-        </TouchableOpacity>
+        <CopyButton text={data.id} />
       </View>
-      <View
-        style={{
-          backgroundColor: 'white',
-          padding: 20,
-          flexDirection: 'row',
-          borderBottomColor: '#ebebeb',
-          borderBottomWidth: 2,
-          justifyContent: 'space-between',
-        }}>
-        <Text style={{color: 'black', fontWeight: '800', fontSize: 14}}>
+      <View style={styles.headerWrapper}>
+        <Text style={styles.text}>
           {TransactionDetailEnum.DETAIL_TRANSAKSI}
         </Text>
         <Pressable>
-          <Text style={{color: '#f96a53', fontWeight: '800', fontSize: 14}}>
-            {TransactionDetailEnum.TUTUP}
-          </Text>
+          <Text style={styles.closeTxt}>{TransactionDetailEnum.TUTUP}</Text>
         </Pressable>
       </View>
-      <View style={{backgroundColor: 'white', padding: 20}}>
+      <View style={styles.infoWrapper}>
         <SenderBankText
           data={{
             senderBank: data.sender_bank,
@@ -132,4 +100,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3faf8',
     paddingTop: 24,
   },
+  trxIdWrapper: {
+    backgroundColor: 'white',
+    padding: 20,
+    flexDirection: 'row',
+    borderBottomColor: '#f8f8f8',
+    borderBottomWidth: 1,
+  },
+  text: {color: 'black', fontWeight: '800', fontSize: 14},
+  headerWrapper: {
+    backgroundColor: 'white',
+    padding: 20,
+    flexDirection: 'row',
+    borderBottomColor: '#ebebeb',
+    borderBottomWidth: 2,
+    justifyContent: 'space-between',
+  },
+  closeTxt: {color: '#f96a53', fontWeight: '800', fontSize: 14},
+  infoWrapper: {backgroundColor: 'white', padding: 20},
 });
