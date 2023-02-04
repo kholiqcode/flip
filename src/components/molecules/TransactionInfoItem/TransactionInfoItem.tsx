@@ -12,7 +12,10 @@ const TransactionInfoItem = memo((props: TransactionInfoItemProps) => {
   const {label, value, ...baseProps} = props;
   return (
     <View {...baseProps}>
-      <Text style={styles.text}>{label}</Text>
+      <Text
+        style={StyleSheet.flatten([styles.text, {textTransform: 'uppercase'}])}>
+        {label}
+      </Text>
       <Gap height={3} />
       <Text style={StyleSheet.flatten([styles.text, {fontWeight: '600'}])}>
         {value}

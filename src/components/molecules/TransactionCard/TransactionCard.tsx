@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {StyleSheet, Text, View, ViewProps} from 'react-native';
+import {Pressable, PressableProps, StyleSheet, Text, View} from 'react-native';
 
 import {Transaction} from '@store/transaction/types';
 import {formatCurrency, formatDate} from '@utils/formatter';
@@ -7,7 +7,7 @@ import {formatCurrency, formatDate} from '@utils/formatter';
 import {Gap, StatusBadge} from '@components/atoms';
 import {SenderBankText} from '@components/molecules/SenderBankText';
 
-export interface TransactionCardProps extends ViewProps {
+export interface TransactionCardProps extends PressableProps {
   data: Transaction;
 }
 
@@ -18,7 +18,7 @@ const TransactionCard = memo((props: TransactionCardProps) => {
   const colorByStatus = isTransactionSuccess ? '#00bb83' : '#f96a53';
 
   return (
-    <View
+    <Pressable
       style={StyleSheet.flatten([
         styles.container,
         {
@@ -32,8 +32,8 @@ const TransactionCard = memo((props: TransactionCardProps) => {
         }}>
         <SenderBankText
           data={{
-            senderBank: data?.sender_bank,
-            beneficiaryBank: data?.beneficiary_bank,
+            senderBank: data.sender_bank,
+            beneficiaryBank: data.beneficiary_bank,
           }}
         />
         <Gap height={8} />
@@ -44,15 +44,15 @@ const TransactionCard = memo((props: TransactionCardProps) => {
           ])}
           numberOfLines={1}>
           {isTransactionSuccess ? null : '- '}
-          {data?.beneficiary_name}
+          {data.beneficiary_name}
         </Text>
         <Gap height={8} />
         <Text style={styles.infoText}>{`${formatCurrency(
-          data?.amount,
-        )} ● ${formatDate(data?.completed_at)}`}</Text>
+          data.amount,
+        )} ● ${formatDate(data.created_at)}`}</Text>
       </View>
       <StatusBadge isSuccess={isTransactionSuccess} />
-    </View>
+    </Pressable>
   );
 });
 
